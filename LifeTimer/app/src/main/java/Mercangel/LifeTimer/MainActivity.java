@@ -89,6 +89,17 @@ public class MainActivity extends Activity
     }
 	
 	public void dateButtonClick(View view){
-		
+		DatePickerFragment newFragment = new DatePickerFragment();
+		newFragment.Listener = new DatePickerDialog.OnDateSetListener(){
+
+			@Override
+			public void onDateSet(DatePicker p1, int year, int month, int day)
+			{
+				date = new Date(Integer.toString(month) + "/" + day + "/" + year);
+			}
+			
+			
+		};
+		newFragment.show(getFragmentManager(), "datePicker");
 	}
 }
