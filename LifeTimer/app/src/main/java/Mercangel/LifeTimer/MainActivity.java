@@ -13,6 +13,8 @@ public class MainActivity extends Activity
 	
 	private String stat = "";
 	
+	NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+	
 	TextView yearsLabel;
 	TextView monthsLabel;
 	TextView weeksLabel;
@@ -47,7 +49,7 @@ public class MainActivity extends Activity
 		life.scheduleAtFixedRate(new TimerTask() {
 				@Override
 				public void run() {
-					final long millis = System.currentTimeMillis() - date.getTime();
+					final long millis = Math.abs((long)(System.currentTimeMillis() - date.getTime()));
 					
 					tickLabel.post(new Runnable(){
 							@Override
@@ -61,31 +63,31 @@ public class MainActivity extends Activity
 								
 								long seconds = millis / 1000;
 								
-								secondsLabel.setText(Long.toString(seconds) + " seconds");
+								secondsLabel.setText(numberFormat.format(seconds) + " seconds");
 								
 								long minutes = (millis / 1000) / 60;
 								
-								minutesLabel.setText(Long.toString(minutes) + " minutes");
+								minutesLabel.setText(numberFormat.format(minutes) + " minutes");
 								
 								long hours = (((millis / 1000) / 60) / 60);
 
-								hoursLabel.setText(Long.toString(hours) + " hours");
+								hoursLabel.setText(numberFormat.format(hours) + " hours");
 								
 								long days = ((((millis / 1000) / 60) / 60) / 24);
 
-								daysLabel.setText(Long.toString(days) + " days");
+								daysLabel.setText(numberFormat.format(days) + " days");
 								
 								long weeks = ((((millis / 1000) / 60) / 60) / 24) / 7;
 
-								weeksLabel.setText(Long.toString(weeks) + " weeks");
+								weeksLabel.setText(numberFormat.format(weeks) + " weeks");
 								
 								long months = ((((millis / 1000) / 60) / 60) / 24) / 30;
 
-								monthsLabel.setText(Long.toString(months) + " months");
+								monthsLabel.setText(numberFormat.format(months) + " months");
 								
 								long years = ((((millis / 1000) / 60) / 60) / 24) / 365;
 
-								yearsLabel.setText(Long.toString(years) + " years");
+								yearsLabel.setText(numberFormat.format(years) + " years");
 								
 								statLabel.setText(stat);
 								
@@ -125,8 +127,6 @@ public class MainActivity extends Activity
 						//date = new Date(datestring + " " + time);
 					}
 				};
-				
-				
 				
 				tfp.show(getFragmentManager(), "time");
 			}
