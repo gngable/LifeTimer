@@ -5,10 +5,13 @@ import android.os.*;
 import java.util.*;
 import android.widget.*;
 import android.view.*;
+import java.text.*;
 
 public class MainActivity extends Activity 
 {
 	private Date date = new Date("7/3/1981");
+	
+	private String stat = "";
 	
 	TextView yearsLabel;
 	TextView monthsLabel;
@@ -18,6 +21,7 @@ public class MainActivity extends Activity
 	TextView minutesLabel;
 	TextView secondsLabel;
 	TextView tickLabel;
+	TextView statLabel;
 	
 	Timer life = new Timer();
 	
@@ -27,6 +31,7 @@ public class MainActivity extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+		
         setContentView(R.layout.main);
 		
 		yearsLabel = (TextView)findViewById(R.id.years_label);
@@ -37,6 +42,7 @@ public class MainActivity extends Activity
 		minutesLabel = (TextView)findViewById(R.id.minutes_label);
 		secondsLabel = (TextView)findViewById(R.id.seconds_label);
 		tickLabel = (TextView)findViewById(R.id.tick_label);
+		statLabel = (TextView)findViewById(R.id.stat_label);
 		
 		life.scheduleAtFixedRate(new TimerTask() {
 				@Override
@@ -81,6 +87,8 @@ public class MainActivity extends Activity
 
 								yearsLabel.setText(Long.toString(years) + " years");
 								
+								statLabel.setText(stat);
+								
 								tick = !tick;
 							}
 					});
@@ -95,11 +103,37 @@ public class MainActivity extends Activity
 			@Override
 			public void onDateSet(DatePicker p1, int year, int month, int day)
 			{
-				date = new Date(Integer.toString(month) + "/" + day + "/" + year);
+				final String datestring = Integer.toString(month + 1) + "/" + day + "/" + year;
+				//date = new Date(Integer.toString(month) + "/" + day + "/" + year);
+				
+				TimePickerFragment tfp = new TimePickerFragment();
+				tfp.Listener = new TimePickerDialog.OnTimeSetListener(){
+
+					@Override
+					public void onTimeSet(TimePicker p1, int hour, int min)
+					{
+						try{
+							String time = "" + hour + ":" + min;
+						
+							stat = datestring + " " + time;
+						
+							DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.ENGLISH);
+							date =  df.parse(stat); 
+						} catch (Exception ex){
+							stat = ex.getMessage();
+						}
+						//date = new Date(datestring + " " + time);
+					}
+				};
+				
+				
+				
+				tfp.show(getFragmentManager(), "time");
 			}
 			
 			
 		};
+		
 		newFragment.show(getFragmentManager(), "datePicker");
 	}
 }

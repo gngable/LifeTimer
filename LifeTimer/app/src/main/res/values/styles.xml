@@ -2,4 +2,10 @@
 <resources>
     <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
 	</style>
+	<style name="NightTheme" >
+		<item name="android:background">#000000</item>
+		<item name="android:textSize">40sp</item>
+		<item name="android:layout_gravity">center</item>
+		<item name="android:textColor">#FFFFFF</item>
+	</style>
 </resources>
