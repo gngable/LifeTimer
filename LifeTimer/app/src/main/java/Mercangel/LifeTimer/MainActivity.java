@@ -65,9 +65,9 @@ public class MainActivity extends Activity
 									tickLabel.setText("Tock");
 								}
 								
-								setTimeLabel.setText(date.toString());
+								setTimeLabel.setText("Set: " + date.toString());
 								
-								currentTimeLabel.setText(new Date().toString());
+								currentTimeLabel.setText("Current: " + new Date().toString());
 								
 								long seconds = millis / 1000;
 								
@@ -97,7 +97,7 @@ public class MainActivity extends Activity
 
 								yearsLabel.setText(numberFormat.format(years) + " years");
 								
-								statLabel.setText(stat);
+								//statLabel.setText(stat);
 								
 								tick = !tick;
 							}
