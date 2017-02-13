@@ -15,6 +15,8 @@ public class MainActivity extends Activity
 	
 	NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
 	
+	TextView setTimeLabel;
+	TextView currentTimeLabel;
 	TextView yearsLabel;
 	TextView monthsLabel;
 	TextView weeksLabel;
@@ -36,6 +38,8 @@ public class MainActivity extends Activity
 		
         setContentView(R.layout.main);
 		
+		setTimeLabel = (TextView)findViewById(R.id.set_time_label);
+		currentTimeLabel = (TextView)findViewById(R.id.current_time_label);
 		yearsLabel = (TextView)findViewById(R.id.years_label);
 		monthsLabel = (TextView)findViewById(R.id.months_label);
 		weeksLabel = (TextView)findViewById(R.id.weeks_label);
@@ -60,6 +64,10 @@ public class MainActivity extends Activity
 								} else {
 									tickLabel.setText("Tock");
 								}
+								
+								setTimeLabel.setText(date.toString());
+								
+								currentTimeLabel.setText(new Date().toString());
 								
 								long seconds = millis / 1000;
 								

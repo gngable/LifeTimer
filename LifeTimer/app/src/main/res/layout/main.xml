@@ -2,78 +2,130 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 	android:orientation="vertical"
-	
-    android:gravity="center">
+
+    android:gravity="top">
 	<!--android:theme="@style/NightTheme"-->
 
-    <TextView
-		android:id="@+id/years_label"
-        android:text=""
-		android:theme="@style/NightTheme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-	
 	<TextView
-		android:id="@+id/months_label"
+		android:id="@+id/set_time_label"
         android:text=""
 		android:theme="@style/NightTheme"
+		android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-	
+
 	<TextView
-		android:id="@+id/weeks_label"
+		android:id="@+id/current_time_label"
         android:text=""
 		android:theme="@style/NightTheme"
+		android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-	
-	<TextView
-		android:id="@+id/days_label"
-        android:text=""
+
+	<View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
 		android:theme="@style/NightTheme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-	
-	<TextView
-		android:id="@+id/hours_label"
-        android:text=""
-		android:theme="@style/NightTheme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-	
-	<TextView
-		android:id="@+id/minutes_label"
-        android:text=""
-		android:theme="@style/NightTheme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-	
-	<TextView
-		android:id="@+id/seconds_label"
-        android:text=""
-		android:theme="@style/NightTheme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-	
-	<TextView
-		android:id="@+id/tick_label"
-        android:text=""
-		android:theme="@style/NightTheme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-	
-	<TextView
-		android:id="@+id/stat_label"
-        android:text=""
-		android:theme="@style/NightTheme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-	
-	<Button
-		android:id="@+id/date_button"
-		android:layout_width="wrap_content"
+	/>
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:onClick="dateButtonClick"
-		android:text="Set"/>
+		android:orientation="vertical"
+		android:layout_weight="1"
+		android:theme="@style/NightTheme"
+	>
+
+		<TextView
+			android:id="@+id/years_label"
+			android:text=""
+			android:theme="@style/NightTheme"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<TextView
+			android:id="@+id/months_label"
+			android:text=""
+			android:theme="@style/NightTheme"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<TextView
+			android:id="@+id/weeks_label"
+			android:text=""
+			android:theme="@style/NightTheme"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<TextView
+			android:id="@+id/days_label"
+			android:text=""
+			android:theme="@style/NightTheme"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<TextView
+			android:id="@+id/hours_label"
+			android:text=""
+			android:theme="@style/NightTheme"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<TextView
+			android:id="@+id/minutes_label"
+			android:text=""
+			android:theme="@style/NightTheme"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<TextView
+			android:id="@+id/seconds_label"
+			android:text=""
+			android:theme="@style/NightTheme"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+	</LinearLayout>
+
+	<View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+		android:theme="@style/NightTheme"
+	/>
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<TextView
+			android:id="@+id/tick_label"
+			android:text=""
+			android:theme="@style/NightTheme"
+			android:layout_weight="1"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent" />
+
+		<TextView
+			android:id="@+id/stat_label"
+			android:text=""
+			android:theme="@style/NightTheme"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<TextView
+			android:id="@+id/date_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:theme="@style/NightTheme"
+			android:onClick="dateButtonClick"
+			android:layout_gravity="right"
+			android:text="Set"/>
+
+	</LinearLayout>
 
 </LinearLayout>
