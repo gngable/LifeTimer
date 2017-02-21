@@ -87,12 +87,18 @@ public class MainActivity extends Activity
 								double seconds = millis / 1000.0;
 								
 								String secondstr = numberFormat.format(seconds);
+								int len = Math.min(secondstr.indexOf('.') +2, secondstr.length());
 								
-								secondsLabel.setText(secondstr.substring(0, secondstr.indexOf('.') +2)  + " seconds");
+								secondsLabel.setText(secondstr.substring(0, len)  + " seconds");
 								
 								double minutes = (millis / 1000.0) / 60;
 								
 								String minutestr = numberFormat.format(minutes);
+								//len = Math.min(minutestr.indexOf('.') + 3, minutestr.length());
+								
+								while (minutestr.indexOf('.') + 3 > minutestr.length()){
+									minutestr += "0";
+								}
 								
 								minutesLabel.setText(minutestr.substring(0, minutestr.indexOf('.') + 3) + " minutes");
 								
@@ -164,5 +170,11 @@ public class MainActivity extends Activity
 		};
 		
 		newFragment.show(getFragmentManager(), "datePicker");
+	}
+	
+	public void statusClick(View view){
+		AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+		builder.setMessage("Created by Nick Gable (Mercangel Software)");
+		builder.show();
 	}
 }

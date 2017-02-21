@@ -105,8 +105,10 @@
 		<TextView
 			android:id="@+id/tick_label"
 			android:text=""
-			android:theme="@style/NightTheme"
+			android:onClick="statusClick"
+			android:textAppearance="@style/NightTheme"
 			android:layout_weight="1"
+			android:background="#000000"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent" />
 
