@@ -6,10 +6,11 @@ import java.util.*;
 import android.widget.*;
 import android.view.*;
 import java.text.*;
+import java.math.*;
 
 public class MainActivity extends Activity 
 {
-	private Date date = new Date("7/3/1981");
+	private Date date = new Date();
 	
 	private String stat = "";
 	
@@ -31,12 +32,16 @@ public class MainActivity extends Activity
 	
 	boolean tick = false;
 	
+	long cadence = 0;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 		
         setContentView(R.layout.main);
+		
+		numberFormat.setRoundingMode(RoundingMode.HALF_EVEN);
 		
 		setTimeLabel = (TextView)findViewById(R.id.set_time_label);
 		currentTimeLabel = (TextView)findViewById(R.id.current_time_label);
@@ -53,57 +58,73 @@ public class MainActivity extends Activity
 		life.scheduleAtFixedRate(new TimerTask() {
 				@Override
 				public void run() {
-					final long millis = Math.abs((long)(System.currentTimeMillis() - date.getTime()));
+					final long milli = Math.abs((long)(System.currentTimeMillis() - date.getTime()));
+					
+					
 					
 					tickLabel.post(new Runnable(){
 							@Override
 							public void run()
 							{
-								if (tick){
+								cadence++;
+								
+								if (tick && cadence % 10 == 0){
 									tickLabel.setText("Tick");
-								} else {
+									tick = !tick;
+								} else if (cadence % 10 == 0) {
 									tickLabel.setText("Tock");
+									tick = !tick;
 								}
+								
+								long millis = milli;
+								
+								if(millis % 10 == 0) millis++;
 								
 								setTimeLabel.setText("Set: " + date.toString());
 								
 								currentTimeLabel.setText("Current: " + new Date().toString());
 								
-								long seconds = millis / 1000;
+								double seconds = millis / 1000.0;
 								
-								secondsLabel.setText(numberFormat.format(seconds) + " seconds");
+								String secondstr = numberFormat.format(seconds);
 								
-								long minutes = (millis / 1000) / 60;
+								secondsLabel.setText(secondstr.substring(0, secondstr.indexOf('.') +2)  + " seconds");
 								
-								minutesLabel.setText(numberFormat.format(minutes) + " minutes");
+								double minutes = (millis / 1000.0) / 60;
 								
-								long hours = (((millis / 1000) / 60) / 60);
+								String minutestr = numberFormat.format(minutes);
+								
+								minutesLabel.setText(minutestr.substring(0, minutestr.indexOf('.') + 3) + " minutes");
+								
+								double hours = (((millis / 1000.0) / 60) / 60);
 
 								hoursLabel.setText(numberFormat.format(hours) + " hours");
 								
-								long days = ((((millis / 1000) / 60) / 60) / 24);
+								double days = ((((millis / 1000.0) / 60) / 60) / 24);
 
 								daysLabel.setText(numberFormat.format(days) + " days");
 								
-								long weeks = ((((millis / 1000) / 60) / 60) / 24) / 7;
+								double weeks = ((((millis / 1000.0) / 60) / 60) / 24) / 7;
 
 								weeksLabel.setText(numberFormat.format(weeks) + " weeks");
 								
-								long months = ((((millis / 1000) / 60) / 60) / 24) / 30;
+								double months = ((((millis / 1000.0) / 60) / 60) / 24) / (365.0 / 12);
 
 								monthsLabel.setText(numberFormat.format(months) + " months");
 								
-								long years = ((((millis / 1000) / 60) / 60) / 24) / 365;
+								double years = ((((millis / 1000.0) / 60) / 60) / 24) / 365;
 
 								yearsLabel.setText(numberFormat.format(years) + " years");
 								
 								//statLabel.setText(stat);
 								
-								tick = !tick;
+								
 							}
 					});
 				}
-			}, 1000, 1000);
+			}, 100, 100);
+			
+			dateButtonClick(null);
     }
 	
 	public void dateButtonClick(View view){
