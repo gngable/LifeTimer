@@ -82,7 +82,7 @@ public class MainActivity extends Activity
 								
 								setTimeLabel.setText("Set: " + date.toString());
 								
-								currentTimeLabel.setText("Current: " + new Date().toString());
+								currentTimeLabel.setText("Now: " + new Date().toString());
 								
 								double seconds = millis / 1000.0;
 								
