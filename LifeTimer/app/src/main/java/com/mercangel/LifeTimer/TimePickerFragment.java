@@ -1,4 +1,4 @@
-package Mercangel.LifeTimer;
+package com.mercangel.LifeTimer;
 import android.app.*;
 import android.os.*;
 import java.util.*;

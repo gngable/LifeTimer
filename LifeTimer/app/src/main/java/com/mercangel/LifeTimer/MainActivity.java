@@ -1,4 +1,4 @@
-package Mercangel.LifeTimer;
+package com.mercangel.LifeTimer;
 
 import android.app.*;
 import android.os.*;
@@ -7,10 +7,15 @@ import android.widget.*;
 import android.view.*;
 import java.text.*;
 import java.math.*;
+import java.io.FileWriter;
+import java.io.*;
+import android.content.*;
 
 public class MainActivity extends Activity 
 {
 	private Date date = new Date();
+	
+	SharedPreferences sharedPreferences = null;
 	
 	private String stat = "";
 	
@@ -130,7 +135,26 @@ public class MainActivity extends Activity
 				}
 			}, 100, 100);
 			
-			dateButtonClick(null);
+			sharedPreferences = getPreferences(MODE_PRIVATE);
+			
+			if (sharedPreferences.contains("time")){
+				DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.ENGLISH);
+				
+				String dateStr = sharedPreferences.getString("time", null);
+				
+				try
+				{
+					date =  df.parse(dateStr);
+				}
+				catch (ParseException e)
+				{
+					
+				}
+			} else {
+				dateButtonClick(null);
+			}
+			
+			
     }
 	
 	public void dateButtonClick(View view){
@@ -155,7 +179,12 @@ public class MainActivity extends Activity
 							stat = datestring + " " + time;
 						
 							DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.ENGLISH);
-							date =  df.parse(stat); 
+							date =  df.parse(stat);
+							
+							SharedPreferences.Editor e = sharedPreferences.edit();
+							
+							e.putString("time", stat);
+							e.commit();
 						} catch (Exception ex){
 							stat = ex.getMessage();
 						}
